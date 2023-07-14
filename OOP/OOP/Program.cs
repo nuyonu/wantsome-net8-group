@@ -132,17 +132,91 @@ using OOP.Week5;
 //Author creanga = new Author("Romania", "Ion Creanga", "Email");
 //creanga.Print();
 
-BankAccount alexBankAccount = new BankAccount
-{
-    AccountHolder = "Alex",
-    AccountNumber = 1
-};
-alexBankAccount.Deposit(1000);
-alexBankAccount.Withdraw(100);
-Console.WriteLine(alexBankAccount.GetBalance());
-Console.WriteLine(alexBankAccount.AccountHolder);
+//BankAccount alexBankAccount = new BankAccount
+//{
+//    AccountHolder = "Alex",
+//    AccountNumber = 1
+//};
+//alexBankAccount.Deposit(1000);
+//alexBankAccount.Withdraw(100);
+//Console.WriteLine(alexBankAccount.GetBalance());
+//Console.WriteLine(alexBankAccount.AccountHolder);
 
-foreach (var transtaction in alexBankAccount.GetTransactions())
-{
-    Console.WriteLine(transtaction);
-}
+//foreach (var transtaction in alexBankAccount.GetTransactions())
+//{
+//    Console.WriteLine(transtaction);
+//}
+
+//Vehicle vehicle = new Tesla();
+//vehicle.SetColor("red");
+//Console.WriteLine(vehicle.GetColor());
+
+//public abstract class Vehicle
+//{
+//    public Vehicle()
+//    {
+
+//    }
+
+//    public abstract string GetColor();
+
+//    public abstract void SetColor(string newColor);
+//}
+
+//public class Tesla : Vehicle
+//{
+//    private string color;
+
+//    public override string GetColor()
+//    {
+//        return "white";
+//    }
+
+//    public override void SetColor(string newColor)
+//    {
+//        this.color = newColor;
+//    }
+//}
+
+// Week5 ClassWork - Exercise 3
+//Person person = new Person();
+//person.FirstName = "Alexandru";
+//person.LastName = "Popescu";
+//person.Age = 25;
+////person.Gender = "Maleee"; // Should throw error
+//person.Gender = "MaLe";
+
+//// Call method Introduce
+//person.Introduce();
+
+//Course cSharpProgramming = new Course
+//{
+//    Id = 1,
+//    Name = "C# Programming"
+//};
+
+//Teacher ion = new Teacher
+//{
+//    FirstName = "Ion",
+//    LastName = "Popescu",
+//    Age = 39,
+//    Courses = new List<Course>
+//    {
+//        new Course() { Id = 1, Name = "C# Programming" },
+//        new Course() { Id = 2, Name = "Math" }
+//    },
+//    Gender = "Male"
+//};
+
+//ion.Introduce();
+//Console.WriteLine(ion.GetFullName());
+
+// Week5 - Exercise 4
+Circle myCircle = new Circle(5);
+Rectangle myRectangle = new Rectangle(5, 10);
+
+Console.WriteLine(myCircle.GetArea()); // Outputs 78.5398163397448
+Console.WriteLine(myCircle.GetPerimeter()); // Outputs 31.4159265358979
+
+Console.WriteLine(myRectangle.GetArea()); // Outputs 50
+Console.WriteLine(myRectangle.GetPerimeter()); // Outputs 30
