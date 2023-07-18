@@ -1,5 +1,6 @@
 ﻿using OOP.Week5_Classwork;
 using OOP.Week5;
+using OOP.Recap;
 
 //Student bogdan = new Student();
 //bogdan.age = 25;
@@ -212,11 +213,13 @@ using OOP.Week5;
 //Console.WriteLine(ion.GetFullName());
 
 // Week5 - Exercise 4
-Circle myCircle = new Circle(5);
-Rectangle myRectangle = new Rectangle(5, 10);
+//Circle myCircle = new Circle(5);
+//Rectangle myRectangle = new Rectangle(5, 10);
 
-Console.WriteLine(myCircle.GetArea()); // Outputs 78.5398163397448
-Console.WriteLine(myCircle.GetPerimeter()); // Outputs 31.4159265358979
+//Console.WriteLine(myCircle.GetArea()); // Outputs 78.5398163397448
+//Console.WriteLine(myCircle.GetPerimeter()); // Outputs 31.4159265358979
 
-Console.WriteLine(myRectangle.GetArea()); // Outputs 50
-Console.WriteLine(myRectangle.GetPerimeter()); // Outputs 30
+//Console.WriteLine(myRectangle.GetArea()); // Outputs 50
+//Console.WriteLine(myRectangle.GetPerimeter()); // Outputs 30
+
+RecapRunner.Run();
