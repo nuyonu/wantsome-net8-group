@@ -6,13 +6,13 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            try
-            {
-                throw new Exception();
-            }
-            catch (ParentException ex) { }
-            catch (ChildException ex) { 
-            }
+            //try
+            //{
+            //    throw new Exception();
+            //}
+            //catch (ParentException ex) { }
+            //catch (ChildException ex) { 
+            //}
         }
     }
 }
