@@ -1,4 +1,5 @@
 ﻿using PizzaApp.API.DataAccess;
+using PizzaApp.API.DataAccess.Entities;
 
 namespace PizzaApp.API.Models.Products
 {

@@ -1,4 +1,4 @@
-﻿namespace PizzaApp.API.DataAccess
+﻿namespace PizzaApp.API.DataAccess.Entities
 {
     public class Product
     {
