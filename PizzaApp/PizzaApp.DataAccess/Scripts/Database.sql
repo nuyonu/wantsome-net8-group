@@ -1,4 +1,7 @@
-﻿--0001CreateFirstTablesScript.sql
+﻿--0000CreateDatabase.sql
+CREATE DATABASE PizzaApp;
+Use PizzaApp;
+--0001CreateFirstTablesScript.sql
 CREATE TABLE Products(
     id int IDENTITY(1, 1),
     name varchar(100) NOT NULL,
