@@ -1,7 +1,6 @@
-﻿using PizzaApp.API.DataAccess;
-using PizzaApp.API.DataAccess.Entities;
+﻿using PizzaApp.DataAccess.Entities;
 
-namespace PizzaApp.API.Models.Products
+namespace PizzaApp.Application.Models.Products
 {
     public class ProductResponseModel
     {

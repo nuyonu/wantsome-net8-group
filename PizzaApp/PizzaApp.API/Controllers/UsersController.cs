@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PizzaApp.API.DataAccess;
-using PizzaApp.API.Models.Users;
+using PizzaApp.Application.Models.Users;
+using PizzaApp.Application.Services;
+using PizzaApp.Application.Services.Interfaces;
 
 namespace PizzaApp.API.Controllers;
 
@@ -8,24 +9,26 @@ namespace PizzaApp.API.Controllers;
 [Route("users")]
 public class UsersController : ControllerBase
 {
-    public UsersController()
+    private readonly IUserService userService;
+
+    public UsersController(IUserService userService)
     {
-        // TODO
+        this.userService = userService;
     }
 
     [HttpGet]
-    public async Task<List<UserResponseModel>> GetAllUsersAsync()
+    public async Task<IActionResult> GetAllUsersAsync()
     {
-        return TemporaryStorage.Users.Select(UserResponseModel.FromUser).ToList();
+        var response = await userService.ReadAllUsersAsync();
+
+        return Ok(response);
     }
 
     [HttpPost]
-    public async Task<UserResponseModel> CreateUserAsync(CreateUserRequestModel requestModel)
+    public async Task<IActionResult> CreateUserAsync(CreateUserRequestModel requestModel)
     {
-        var user = requestModel.ToUser();
-        
-        TemporaryStorage.Users.Add(user);
+        var response = await userService.CreateUserAsync(requestModel);
 
-        return UserResponseModel.FromUser(user);
+        return Ok(response);
     }
 }

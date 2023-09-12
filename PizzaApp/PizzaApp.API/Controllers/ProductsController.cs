@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PizzaApp.API.DataAccess;
-using PizzaApp.API.DataAccess.Entities;
-using PizzaApp.API.Models.Products;
+using PizzaApp.Application.Models.Products;
+using PizzaApp.DataAccess;
+using PizzaApp.DataAccess.Entities;
 
 namespace PizzaApp.API.Controllers
 {

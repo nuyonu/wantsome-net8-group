@@ -1,4 +1,4 @@
-﻿namespace PizzaApp.API.DataAccess.Entities;
+﻿namespace PizzaApp.DataAccess.Entities;
 
 public class User
 {

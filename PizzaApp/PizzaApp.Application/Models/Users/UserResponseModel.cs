@@ -1,6 +1,6 @@
-﻿using PizzaApp.API.DataAccess.Entities;
+﻿using PizzaApp.DataAccess.Entities;
 
-namespace PizzaApp.API.Models.Users;
+namespace PizzaApp.Application.Models.Users;
 
 public class UserResponseModel
 {

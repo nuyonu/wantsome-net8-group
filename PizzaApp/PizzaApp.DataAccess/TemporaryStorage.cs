@@ -1,6 +1,6 @@
-﻿using PizzaApp.API.DataAccess.Entities;
+﻿using PizzaApp.DataAccess.Entities;
 
-namespace PizzaApp.API.DataAccess
+namespace PizzaApp.DataAccess
 {
     public static class TemporaryStorage
     {

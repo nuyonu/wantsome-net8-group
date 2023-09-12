@@ -1,4 +1,4 @@
-﻿--CreateFirstTablesScript.sql
+﻿--0001CreateFirstTablesScript.sql
 CREATE TABLE Products(
     id int IDENTITY(1, 1),
     name varchar(100) NOT NULL,
@@ -33,4 +33,10 @@ CREATE TABLE OrderProduct(
     FOREIGN KEY (product_id) REFERENCES Products(id)
 );
 
---NextUpdates.sql
+--0002DropColumnFirstNameFromUsers.sql
+ALTER TABLE Users
+DROP COLUMN firstName;
+
+--0003AddColumnFirstNameBack.sql
+ALTER TABLE Users
+ADD firstName int;

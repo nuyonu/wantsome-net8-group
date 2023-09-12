@@ -1,8 +1,7 @@
-﻿using PizzaApp.API.DataAccess;
-using System.ComponentModel.DataAnnotations;
-using PizzaApp.API.DataAccess.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using PizzaApp.DataAccess.Entities;
 
-namespace PizzaApp.API.Models.Products
+namespace PizzaApp.Application.Models.Products
 {
     public class UpdateProductRequestModel
     {
