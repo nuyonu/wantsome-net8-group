@@ -1,0 +1,19 @@
+﻿@page "/aboutUs"
+@inject NumbersService NumbService;
+
+<PageTitle>About ussss</PageTitle>
+
+<h3>AboutUs</h3>
+@*<Numbers></Numbers>
+<Index></Index>
+<Counter></Counter>
+<FetchData></FetchData>*@
+
+@foreach(var number in NumbService.Numbers)
+{
+    @number
+}
+
+@code {
+
+}

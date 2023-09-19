@@ -1,0 +1,23 @@
+﻿<h3 class="red">Greeting</h3>
+
+<p style="color:@ColorDisplay;">Hello @Name from Greeting Component!!</p>
+<input type="text" @bind-value="defaultStudent.Name" />
+<p>Student name: @defaultStudent.Name</p>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string ColorDisplay { get; set; } = "black";
+
+    private Student defaultStudent = new Student()
+        {
+            Name = "Default"
+        };
+
+    class Student
+    {
+        public string Name { get; set; }
+    }
+}
