@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaApp.Application", "Piz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaApp.DataAccess", "PizzaApp.DataAccess\PizzaApp.DataAccess.csproj", "{62AC54EE-CE27-4D62-84FF-A8E35ECCE702}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaApp.WebUI", "PizzaApp.WebUI\PizzaApp.WebUI.csproj", "{9E89AB2E-926C-4530-9DF6-3A14E3893588}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaApp.WebUI", "PizzaApp.WebUI\PizzaApp.WebUI.csproj", "{9E89AB2E-926C-4530-9DF6-3A14E3893588}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

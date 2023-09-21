@@ -1,4 +1,6 @@
 ﻿@page "/aboutUs"
+@using System.ComponentModel.DataAnnotations;
+@using PizzaApp.WebUI.Validators;
 @inject NumbersService NumbService;
 
 <PageTitle>About ussss</PageTitle>
@@ -9,7 +11,7 @@
 <Counter></Counter>
 <FetchData></FetchData>*@
 
-@foreach(var number in NumbService.Numbers)
+@foreach (var number in NumbService.Numbers)
 {
     @number
 }

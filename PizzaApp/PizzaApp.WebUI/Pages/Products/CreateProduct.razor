@@ -1,0 +1,56 @@
+﻿@page "/products/create"
+@using System.ComponentModel.DataAnnotations;
+@using PizzaApp.WebUI.Models;
+@using PizzaApp.WebUI.Validators;
+<h3>CreateProduct</h3>
+
+<EditForm class="d-flex flex-column align-items-center" Model="@product" OnValidSubmit="HandleValidSubmitAsync">
+    <DataAnnotationsValidator />
+    @*<ValidationSummary></ValidationSummary>*@
+    <div class="m-2">
+        <label for="name">Name: </label>
+        <InputText id="name" @bind-Value="@product.Name"></InputText>
+        <ValidationMessage For="@(() => product.Name)"></ValidationMessage>
+    </div>
+    <div class="m-2">
+        <label for="price">Price: </label>
+        <InputNumber id="price" @bind-Value="@product.Price"></InputNumber>
+        <ValidationMessage For="@(() => product.Price)"></ValidationMessage>
+    </div>
+    <div class="m-2">
+        <label for="description">Description: </label>
+    <InputText id="description" @bind-Value="@product.Description"></InputText>
+    </div>
+    <div class="m-2">
+        <label for="category">Category: </label>
+        <InputSelect id="category" @bind-Value="@product.Category">
+            @foreach (var category in Enum.GetValues<Category>())
+            {
+                <option value="@category">@category</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => product.Category)"></ValidationMessage>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create product</button>
+</EditForm>
+
+@if (displayMessage)
+{
+    <div class="d-flex flex-row align-items-center">
+        <p style="font-size: 25px;color: green;">The product was created.</p>
+    </div>
+}
+
+@code {
+    private CreateProductRequestModel product = new();
+
+    private bool displayMessage = false;
+
+    public async Task HandleValidSubmitAsync()
+    {
+        Console.WriteLine("The product was created.");
+        displayMessage = true;
+        product = new();
+    }
+}
