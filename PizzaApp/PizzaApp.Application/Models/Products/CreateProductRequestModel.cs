@@ -11,11 +11,22 @@ namespace PizzaApp.Application.Models.Products
         public string? Name { get; set; }
 
         [Required]
-        public double Price { get; set; }
+        public int Price { get; set; }
 
         public string? Description { get; set; }
 
         [Required]
         public Category Category { get; set; }
+
+        public Product ToProduct()
+        {
+            return new Product
+            {
+                Name = Name,
+                Description = Description,
+                Price = Price,
+                Category = Category,
+            };
+        }
     }
 }

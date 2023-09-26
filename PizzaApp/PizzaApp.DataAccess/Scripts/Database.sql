@@ -24,16 +24,16 @@ CREATE TABLE Users(
 
 CREATE TABLE Orders(
     id int IDENTITY(1, 1),
-    user_id int NOT NULL,
+    userId int NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    FOREIGN KEY (userId) REFERENCES Users(id)
 );
 
 CREATE TABLE OrderProduct(
-    order_id int NOT NULL,
-    product_id int NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES Orders(id),
-    FOREIGN KEY (product_id) REFERENCES Products(id)
+    orderId int NOT NULL,
+    productId int NOT NULL,
+    FOREIGN KEY (orderId) REFERENCES Orders(id),
+    FOREIGN KEY (productId) REFERENCES Products(id)
 );
 
 --0002DropColumnFirstNameFromUsers.sql
@@ -42,4 +42,9 @@ DROP COLUMN firstName;
 
 --0003AddColumnFirstNameBack.sql
 ALTER TABLE Users
-ADD firstName int;
+ADD firstName varchar(100);
+
+--0004AddPrimaryKeyToOrderProduct.sql
+ALTER TABLE OrderProduct
+ADD id int IDENTITY(1, 1) PRIMARY KEY;
+

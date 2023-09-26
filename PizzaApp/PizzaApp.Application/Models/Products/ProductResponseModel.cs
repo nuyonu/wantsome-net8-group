@@ -8,10 +8,22 @@ namespace PizzaApp.Application.Models.Products
 
         public string? Name { get; set; }
 
-        public double Price { get; set; }
+        public int Price { get; set; }
 
         public string? Description { get; set; }
 
         public Category Category { get; set; }
+
+        public static ProductResponseModel FromProduct(Product product)
+        {
+            return new ProductResponseModel
+            {
+                Id = product.Id,
+                Category = product.Category,
+                Description = product.Description,
+                Price = product.Price,
+                Name = product.Name
+            };
+        }
     }
 }

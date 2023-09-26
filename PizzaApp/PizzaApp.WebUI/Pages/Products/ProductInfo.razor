@@ -1,0 +1,31 @@
+﻿@page "/products/{Id:int}"
+@using PizzaApp.WebUI.Models
+@inject HttpClient Http
+
+<button class="btn btn-secondary"><a href="products">Go to products</a></button>
+
+<div class="product-info">
+    <p>Name: @product.Name</p>
+    <p>Price: @product.Price</p>
+    <p>Category: @product.Category</p>
+    <p>Description: @product.Description</p>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    ProductResponseModel product = new ProductResponseModel
+    {
+        Id = 5,
+        Description = "Lorem ipsum etc",
+        Name = "Product",
+        Category = Category.Pizza,
+        Price = 25
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        product = await Http.GetFromJsonAsync<ProductResponseModel>($"products/{Id}");
+    }
+}

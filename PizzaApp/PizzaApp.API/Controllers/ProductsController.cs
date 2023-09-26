@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PizzaApp.Application.Models.Products;
-using PizzaApp.DataAccess;
-using PizzaApp.DataAccess.Entities;
+using PizzaApp.Application.Services.Interfaces;
 
 namespace PizzaApp.API.Controllers
 {
@@ -9,6 +8,13 @@ namespace PizzaApp.API.Controllers
     [Route("products")] // /products
     public class ProductsController : ControllerBase
     {
+        private readonly IProductService productService;
+
+        public ProductsController(IProductService productService)
+        {
+            this.productService = productService;
+        }
+        
         // CRUD
         // C
         [HttpPost("")] // + "" => /products
@@ -20,67 +26,32 @@ namespace PizzaApp.API.Controllers
             //    return BadRequest("Name should be greather than 5 characters.");
             //}
 
-            Product product = new Product
-            {
-                Name = requestModel.Name,
-                Description = requestModel.Description,
-                Price = requestModel.Price,
-                Category = requestModel.Category,
-            };
-            product.Id = TemporaryStorage.Products.Count;
+            var response = await this.productService.CreateAsync(requestModel);
 
-            TemporaryStorage.Products.Add(product);
-
-            ProductResponseModel response = new ProductResponseModel
-            {
-                Id = product.Id,
-                Category = product.Category,
-                Description = product.Description,
-                Price = product.Price,
-                Name = product.Name,
-            };
-
-            return Created(string.Empty, response);
+            return Created(nameof(ReadProductByIdAsync), response);
         }
-
-        // R
-        [HttpGet] // + "" => /products
-        public async Task<ActionResult<List<Product>>> GetAllProductsAsync()
+        
+        //R
+        [HttpGet] // + "" => /products?orderBy=createdAt&page=1&pageCount=10
+        public async Task<IActionResult> GetAllProductsAsync([FromQuery] ReadProductsRequestModel requestModel)
         {
-            return TemporaryStorage.Products;
+            var response = await this.productService.ReadAllAsync(requestModel);
+            
+            return Ok(response);
         }
 
         [HttpGet("{id}")] // + {id} => /products/{id}
-        public async Task<ActionResult<Product>> ReadProductByIdAsync(int id)
+        public async Task<IActionResult> ReadProductByIdAsync(int id)
         {
-            Product product = TemporaryStorage.Products.Where(x => x.Id == id).First();
-
-            return product;
+            var response = await this.productService.ReadByIdAsync(id);
+            
+            return Ok(response);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProductAsync(int id, UpdateProductRequestModel requestModel)
         {
-            Product productFromDb = TemporaryStorage.Products.Where(x => x.Id == id).FirstOrDefault();
-
-            if (productFromDb == null) 
-            {
-                return NotFound();
-            }
-
-            productFromDb.Name = requestModel.Name;
-            productFromDb.Description = requestModel.Description;
-            productFromDb.Price = requestModel.Price;
-            productFromDb.Category = requestModel.Category;
-
-            ProductResponseModel response = new ProductResponseModel
-            {
-                Id = productFromDb.Id,
-                Category = productFromDb.Category,
-                Description = productFromDb.Description,
-                Price = productFromDb.Price,
-                Name = productFromDb.Name,
-            };
+            var response = await this.productService.UpdateAsync(id, requestModel);
 
             return Ok(response);
         }
@@ -88,12 +59,8 @@ namespace PizzaApp.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
-            Product productFromDb = TemporaryStorage.Products.Where(x => x.Id == id).First();
-
-            int productIndex = TemporaryStorage.Products.IndexOf(productFromDb);
-
-            TemporaryStorage.Products.RemoveAt(productIndex);
-
+            await this.productService.DeleteAsync(id);
+            
             return NoContent();
         }
     }

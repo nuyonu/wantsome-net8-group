@@ -1,4 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PizzaApp.Application.Services;
+using PizzaApp.DataAccess;
+using PizzaApp.DataAccess.Entities;
 
 namespace PizzaApp.API.Controllers
 {
@@ -6,28 +10,48 @@ namespace PizzaApp.API.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly DatabaseContext databaseContext;
+        private readonly CurrentUserService currentUserService;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(DatabaseContext databaseContext, CurrentUserService currentUserService)
         {
-            _logger = logger;
+            this.databaseContext = databaseContext;
+            this.currentUserService = currentUserService;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get([FromHeader] string city)
+        public IActionResult Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            this.databaseContext.Orders.Add(new Order
             {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                UserId = currentUserService.Id,
+                Products = new List<OrderProduct>
+                {
+                    new OrderProduct
+                    {
+                        ProductId = 1
+                    },
+                    new OrderProduct
+                    {
+                        ProductId = 2
+                    }
+                }
+            });
+
+            this.databaseContext.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpGet("orders")]
+        public IActionResult GetOrders()
+        {
+            var response = databaseContext.Orders.Include(x => x.User)
+                .Include(x => x.Products)
+                .ThenInclude(x => x.Product)
+                .Where(x => x.UserId == currentUserService.Id);
+            
+            return Ok(response);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿@page "/products/create"
-@using System.ComponentModel.DataAnnotations;
 @using PizzaApp.WebUI.Models;
-@using PizzaApp.WebUI.Validators;
+@inject HttpClient Http
 <h3>CreateProduct</h3>
 
 <EditForm class="d-flex flex-column align-items-center" Model="@product" OnValidSubmit="HandleValidSubmitAsync">
@@ -49,7 +48,7 @@
 
     public async Task HandleValidSubmitAsync()
     {
-        Console.WriteLine("The product was created.");
+        await Http.PostAsJsonAsync("products", product);
         displayMessage = true;
         product = new();
     }
