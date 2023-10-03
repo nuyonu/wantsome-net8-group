@@ -22,6 +22,11 @@ public class UserRepository : IUserRepository
         return addedEntity.Entity;
     }
 
+    public async Task<User?> GetByUsername(string username)
+    {
+        return await databaseContext.Users.FirstOrDefaultAsync(x => x.Username == username);
+    }
+
     public async Task<List<User>> ReadAllAsync()
     {
         return await databaseContext.Users.ToListAsync();

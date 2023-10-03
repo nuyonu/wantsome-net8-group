@@ -1,6 +1,7 @@
 ﻿@page "/products/{Id:int}"
 @using PizzaApp.WebUI.Models
 @inject HttpClient Http
+@attribute [Authorize(Roles = "User,Admin")]
 
 <button class="btn btn-secondary"><a href="products">Go to products</a></button>
 

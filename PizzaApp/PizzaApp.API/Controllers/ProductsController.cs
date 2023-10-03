@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PizzaApp.Application.Models.Products;
 using PizzaApp.Application.Services.Interfaces;
 
@@ -6,6 +7,7 @@ namespace PizzaApp.API.Controllers
 {
     [ApiController]
     [Route("products")] // /products
+    [Authorize(Roles = "User")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService productService;
@@ -17,6 +19,7 @@ namespace PizzaApp.API.Controllers
         
         // CRUD
         // C
+        [Authorize(Roles = "Admin")]
         [HttpPost("")] // + "" => /products
         public async Task<IActionResult> CreateProductAsync(CreateProductRequestModel requestModel)
         {

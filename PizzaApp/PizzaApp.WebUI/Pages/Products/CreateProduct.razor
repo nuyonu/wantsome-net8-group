@@ -1,6 +1,8 @@
 ﻿@page "/products/create"
 @using PizzaApp.WebUI.Models;
 @inject HttpClient Http
+@attribute [Authorize(Roles = "Admin")]
+
 <h3>CreateProduct</h3>
 
 <EditForm class="d-flex flex-column align-items-center" Model="@product" OnValidSubmit="HandleValidSubmitAsync">

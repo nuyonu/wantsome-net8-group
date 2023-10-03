@@ -21,4 +21,9 @@ public class MemoryUserRepository : IUserRepository
     {
         TemporaryStorage.Users.Remove(user);
     }
+
+    public Task<User?> GetByUsername(string username)
+    {
+        throw new NotImplementedException();
+    }
 }

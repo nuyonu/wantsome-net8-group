@@ -1,0 +1,53 @@
+﻿@page "/Login"
+@using PizzaApp.Shared.Models.Users
+@using Blazored.LocalStorage
+@inject HttpClient Http
+@inject ILocalStorageService LocalStorage
+@inject AuthenticationStateProvider AuthState
+@inject NavigationManager NavManager
+
+<div class="login-box">
+  <h2>Login</h2>
+  <EditForm Model="@requestModel" OnSubmit="HandleSubmitAsync">
+    <div class="user-box">
+      <input type="text" name="" required="" @bind-value="requestModel.Username">
+      <label>Username</label>
+    </div>
+    <div class="user-box">
+      <input type="password" name="" required="" @bind-value="requestModel.Password">
+      <label>Password</label>
+    </div>
+    <button class="btn btn-primary" type="submit">
+      Submit
+    </button>
+  </EditForm>
+</div>
+
+@code {
+  private LoginRequestModel requestModel = new();
+
+  protected override async Task OnInitializedAsync()
+  {
+    var authState = await AuthState.GetAuthenticationStateAsync();
+
+    if (authState.User.Identity is not null && authState.User.Identity.IsAuthenticated)
+    {
+      // Redirect to home if user is already authenticated
+      NavManager.NavigateTo("/");
+    }
+  }
+
+  public async Task HandleSubmitAsync()
+  {
+    var responseHttp = await this.Http.PostAsJsonAsync("users/login", requestModel);
+
+    var response = await responseHttp.Content.ReadFromJsonAsync<LoginResponseModel>();
+
+    await LocalStorage.SetItemAsync("user", response);
+
+    await AuthState.GetAuthenticationStateAsync();
+    
+    // Redirect to home after user is authenticated
+    NavManager.NavigateTo("/");
+  }
+}

@@ -9,4 +9,6 @@ public interface IUserRepository
     Task<List<User>> ReadAllAsync();
 
     Task DeleteAsync(User user);
+
+    Task<User?> GetByUsername(string username);
 }

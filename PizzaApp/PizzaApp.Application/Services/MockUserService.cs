@@ -1,6 +1,7 @@
 ﻿using PizzaApp.Application.Models.Users;
 using PizzaApp.Application.Services.Interfaces;
 using PizzaApp.DataAccess.Repositories;
+using PizzaApp.Shared.Models.Users;
 
 namespace PizzaApp.Application.Services;
 
@@ -23,6 +24,11 @@ public class MockUserService : IUserService
                 Email = "fake@gmail.com"
             }
         };
+    }
+
+    public Task<LoginResponseModel> LoginAsync(LoginRequestModel requestModel)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<UserResponseModel> CreateUserAsync(CreateUserRequestModel requestModel)
